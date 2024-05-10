@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { API_TOKEN, API_URL, API_VERSION } from "../../environment/api.const";
+import { cardInterface } from "../interfaces/card.interface";
 
 @Injectable({
   providedIn: "root",
@@ -12,7 +13,7 @@ export class PokemonService {
 
   constructor(private http: HttpClient) {}
 
-  getCards(): Observable<any> {
+  getCards(): Observable<cardInterface> {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.token}`,
     });
