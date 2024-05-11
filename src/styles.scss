@@ -9,3 +9,23 @@ body {
   flex-direction: column;
   height: 100vh;
 }
+
+:root {
+  --input-bg: #DBDCDF;
+  --input-placeholder: #23232366;
+
+  input, input:focus-visible {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    padding: 0;
+    border: none !important;
+    background-color: var(--input-bg);
+
+    ::placeholder {
+      color: var(--input-placeholder);
+      opacity: 1;
+    }
+  }
+}
