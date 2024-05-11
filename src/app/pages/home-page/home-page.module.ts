@@ -3,10 +3,18 @@ import { NgModule } from "@angular/core";
 import { HomePageComponent } from "./home-page.component";
 import { HomePageRoutingModule } from "./home-page.routing.module";
 import { HeaderModule } from "../../components/header/header.module";
+import { BannerModule } from "../../components/banner/banner.module";
+import { ButtonModule } from "../../components/button/button.module";
 
 @NgModule({
   declarations: [HomePageComponent],
-  imports: [HomePageRoutingModule, CommonModule, HeaderModule],
+  imports: [
+    HomePageRoutingModule,
+    CommonModule,
+    HeaderModule,
+    BannerModule,
+    ButtonModule,
+  ],
   exports: [HomePageComponent],
 })
 export class HomePageModule {}

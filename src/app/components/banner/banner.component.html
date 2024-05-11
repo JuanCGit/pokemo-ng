@@ -1,0 +1,10 @@
+<div class="banner">
+  <div class="banner__inner" [style.background-image]="'url(' + bgImage + ')'">
+    <img [src]="overImage" alt="over banner image" />
+  </div>
+  @if (isHomeBanner) {
+    <div class="banner__action">
+      <app-button>See cards</app-button>
+    </div>
+  }
+</div>
