@@ -1,0 +1,9 @@
+<div
+  class="progress-bar"
+  [style.background-color]="'var(' + (blackOrWhite === 'W' ? '--light-transparent' : '--dark-transparent') + ')'">
+  <div
+    class="progress-bar__quantity"
+    [style.width.%]="total | acquiredPercentagePipe : acquired"
+    [style.background-color]="'var(' +(blackOrWhite === 'W' ? '--light' : '--dark') +')'">
+  </div>
+</div>
