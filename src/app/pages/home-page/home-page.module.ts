@@ -5,6 +5,7 @@ import { HomePageRoutingModule } from "./home-page.routing.module";
 import { HeaderModule } from "../../components/header/header.module";
 import { BannerModule } from "../../components/banner/banner.module";
 import { ButtonModule } from "../../components/button/button.module";
+import { ExpansionModule } from "../../components/expansion/expansion.module";
 
 @NgModule({
   declarations: [HomePageComponent],
@@ -14,6 +15,7 @@ import { ButtonModule } from "../../components/button/button.module";
     HeaderModule,
     BannerModule,
     ButtonModule,
+    ExpansionModule,
   ],
   exports: [HomePageComponent],
 })

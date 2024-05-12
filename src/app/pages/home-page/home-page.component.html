@@ -1,8 +1,20 @@
 <div class="home">
   <app-banner
-    [bgImage]="'/assets/example-home-banner.jpg'"
+    [bgImage]="'/assets/images/example-home-banner.jpg'"
     [isHomeBanner]="true"
-    [overImage]="'/assets/example-over-image.png'"
+    [overImage]="'/assets/images/example-over-image.png'"
   >
   </app-banner>
+  <div class="home__last-expansions">
+    <div class="home__last-expansions__header">
+      <span class="home__last-expansions__header__title">Last expansions</span>
+      <div class="home__last-expansions__header__all">See All</div>
+    </div>
+    <app-expansion
+      [bgImage]="'/assets/images/example-expansion.jpg'"
+      [overImage]="'/assets/images/example-over-image.png'"
+      [acquired]="100"
+      [total]="200"
+    ></app-expansion>
+  </div>
 </div>

@@ -8,6 +8,7 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  font-family: 'kanit-regular', sans-serif;
 }
 
 :root {
@@ -17,6 +18,14 @@ body {
   --dark-transparen: rgba(35, 35, 35, 0.2);
   --light: #EFF0F4;
   --light-transparent:  rgba(239, 240, 244, 0.2);
+
+  @font-face {
+    font-family: 'kanit-regular';
+    src: url('/assets/fonts/kanit-regular.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+  }
+
 
   input, input:focus-visible {
     -webkit-appearance: none;
