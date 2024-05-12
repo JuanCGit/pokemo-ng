@@ -6,6 +6,7 @@ import { HeaderModule } from "../../components/header/header.module";
 import { BannerModule } from "../../components/banner/banner.module";
 import { ButtonModule } from "../../components/button/button.module";
 import { ExpansionModule } from "../../components/expansion/expansion.module";
+import { ExpansionsCarrouselModule } from "./components/expansions-carrousel/expansions-carrousel.module";
 
 @NgModule({
   declarations: [HomePageComponent],
@@ -16,6 +17,7 @@ import { ExpansionModule } from "../../components/expansion/expansion.module";
     BannerModule,
     ButtonModule,
     ExpansionModule,
+    ExpansionsCarrouselModule,
   ],
   exports: [HomePageComponent],
 })

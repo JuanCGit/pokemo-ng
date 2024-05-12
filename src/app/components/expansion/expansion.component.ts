@@ -1,4 +1,5 @@
 import { Component, Input } from "@angular/core";
+import { expansionInterface } from "../../interfaces/expansion.interface";
 
 @Component({
   selector: "app-expansion",
@@ -6,8 +7,5 @@ import { Component, Input } from "@angular/core";
   styleUrl: "./expansion.component.scss",
 })
 export class ExpansionComponent {
-  @Input() acquired: number = 0;
-  @Input() total: number = 100;
-  @Input() overImage: string = "";
-  @Input() bgImage: string = "";
+  @Input() expansion!: expansionInterface;
 }
