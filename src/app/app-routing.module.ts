@@ -9,6 +9,13 @@ const routes: Routes = [
         (m) => m.HomePageModule,
       ),
   },
+  {
+    path: "expansion/:id",
+    loadChildren: () =>
+      import("./pages/expansion-page/expansion-page.module").then(
+        (m) => m.ExpanionPageModule,
+      ),
+  },
   { path: "**", redirectTo: "" },
 ];
 
