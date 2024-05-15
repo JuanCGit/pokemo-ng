@@ -1,7 +1,7 @@
 import { setImageInterface } from "./image";
 import { legalityInterface } from "./legality.interface";
 
-export interface setInterface {
+export interface SetInterface {
   id: string;
   images: setImageInterface;
   legalities: legalityInterface;
