@@ -13,7 +13,7 @@ const routes: Routes = [
     path: "expansion/:id",
     loadChildren: () =>
       import("./pages/expansion-page/expansion-page.module").then(
-        (m) => m.ExpanionPageModule,
+        (m) => m.ExpansionPageModule,
       ),
   },
   { path: "**", redirectTo: "" },

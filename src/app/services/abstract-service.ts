@@ -10,7 +10,7 @@ export class AbstractService {
 
   constructor(private http: HttpClient) {}
 
-  cacheReques<T>(
+  cacheRequest<T>(
     key: string,
     method: string,
     url: string,

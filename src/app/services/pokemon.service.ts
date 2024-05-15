@@ -24,7 +24,7 @@ export class PokemonService extends AbstractService {
   // Cards
 
   getCardById(cardId: string): Observable<cardInterface> {
-    return this.cacheReques(
+    return this.cacheRequest(
       `card-${cardId}`,
       "GET",
       `${this.apiUrl}/cards/${cardId}`,
@@ -32,10 +32,10 @@ export class PokemonService extends AbstractService {
     );
   }
 
-  getCardByExpansion(
+  getCardsByExpansion(
     expansionId: string,
   ): Observable<paginatedInterface<cardInterface>> {
-    return this.cacheReques(
+    return this.cacheRequest(
       `card-${expansionId}`,
       "GET",
       `${this.apiUrl}/cards?q=set.id:${expansionId}`,
@@ -43,12 +43,10 @@ export class PokemonService extends AbstractService {
     );
   }
 
-  // Sets
-
   getSetsByName(
     searchString: string,
   ): Observable<paginatedInterface<SetInterface>> {
-    return this.cacheReques(
+    return this.cacheRequest(
       `card-${searchString}`,
       "GET",
       `${this.apiUrl}/sets?q=name:${searchString}* series:${searchString}*`,
