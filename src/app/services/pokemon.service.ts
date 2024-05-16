@@ -12,9 +12,8 @@ import { SetInterface } from "../interfaces/set.interface";
 })
 export class PokemonService extends AbstractService {
   apiUrl: string = `${API_URL}/v${API_VERSION}`;
-  token = API_TOKEN;
   headers = new HttpHeaders({
-    Authorization: `Bearer ${this.token}`,
+    Authorization: `Bearer ${API_TOKEN}`,
   });
 
   constructor(private http: HttpClient) {

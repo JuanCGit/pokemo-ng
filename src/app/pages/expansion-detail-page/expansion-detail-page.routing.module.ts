@@ -1,15 +1,16 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { ExpansionPageComponent } from "./expansion-page.component";
+import { ExpansionDetailPageComponent } from "./expansion-detail-page.component";
 
 const routes: Routes = [
   {
     path: "",
-    component: ExpansionPageComponent,
+    component: ExpansionDetailPageComponent,
   },
 ];
+
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ExpansionPageRoutingModule {}
+export class ExpansionDetailPageRoutingModule {}
