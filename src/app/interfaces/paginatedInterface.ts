@@ -1,4 +1,4 @@
-export interface paginatedInterface<T> {
+export interface PaginatedInterface<T> {
   count: number;
   data: T[];
   page: number;

@@ -3,7 +3,7 @@ export enum LegalityEnum {
   BANNED = "Banned",
 }
 
-export interface legalityInterface {
+export interface LegalityInterface {
   expanded: LegalityEnum | undefined;
   standard: LegalityEnum | undefined;
   unlimited: LegalityEnum | undefined;

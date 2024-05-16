@@ -1,4 +1,4 @@
-export interface cardMarketInterface {
+export interface CardMarketInterface {
   url: string;
   updatedAt: string;
   prices: {

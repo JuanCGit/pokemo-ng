@@ -1,4 +1,4 @@
-export interface expansionInterface {
+export interface ExpansionInterface {
   bgImage: string;
   overImage: string;
   acquired: number;

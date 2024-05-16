@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { expansionInterface } from "../../../../interfaces/expansion.interface";
+import { ExpansionInterface } from "../../../../interfaces/expansion.interface";
 
 @Component({
   selector: "app-expansions-carrousel",
@@ -8,7 +8,7 @@ import { expansionInterface } from "../../../../interfaces/expansion.interface";
 })
 export class ExpansionsCarrouselComponent {
   @Input() carrouselTitle: string = "";
-  @Input() expansions: expansionInterface[] = [];
+  @Input() expansions: ExpansionInterface[] = [];
   @Input() seeAllLink: string =
     "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley";
 }

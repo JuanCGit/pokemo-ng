@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, shareReplay } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -8,18 +7,15 @@ import { Observable } from "rxjs";
 export class AbstractService {
   private readonly cache: { [key: string]: unknown } = {};
 
-  constructor(private http: HttpClient) {}
-
-  cacheRequest<T>(
+  cacheRequest<T = unknown>(
     key: string,
-    method: string,
-    url: string,
-    headers: HttpHeaders,
+    request: Observable<T>,
   ): Observable<T> {
+    console.log(this.cache);
     if (!this.cache[key]) {
-      this.cache[key] = this.http.request<T>(method, url, { headers });
-      return this.http.request<T>(method, url, { headers });
+      this.cache[key] = request.pipe(shareReplay(1));
     }
+
     return this.cache[key] as Observable<T>;
   }
 }

@@ -1,10 +1,10 @@
-import { setImageInterface } from "./image";
-import { legalityInterface } from "./legality.interface";
+import { SetImageInterface } from "./image";
+import { LegalityInterface } from "./legality.interface";
 
 export interface SetInterface {
   id: string;
-  images: setImageInterface;
-  legalities: legalityInterface;
+  images: SetImageInterface;
+  legalities: LegalityInterface;
   name: string;
   printedTotal: number;
   ptcgoCode: string;

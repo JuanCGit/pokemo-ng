@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { expansionInterface } from "../../interfaces/expansion.interface";
+import { ExpansionInterface } from "../../interfaces/expansion.interface";
 
 @Component({
   selector: "app-home-page",
@@ -7,13 +7,15 @@ import { expansionInterface } from "../../interfaces/expansion.interface";
   styleUrl: "./home-page.component.scss",
 })
 export class HomePageComponent {
-  expansionMock: expansionInterface = {
+  constructor() {}
+
+  expansionMock: ExpansionInterface = {
     overImage: "/assets/images/example-over-image.png",
     bgImage: "/assets/images/example-expansion.jpg",
     total: 100,
     acquired: 20,
   };
-  expansions: expansionInterface[] = Array.from(
+  expansions: ExpansionInterface[] = Array.from(
     { length: 10 },
     () => this.expansionMock,
   );

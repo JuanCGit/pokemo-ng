@@ -1,15 +1,15 @@
-import { ancientTraitInterface } from "./ancient-trait.interface";
-import { abilityInterface } from "./ability.interface";
-import { attackInterface } from "./attack.interface";
-import { weaknessInterface } from "./weakness.interface";
-import { resistanceInterface } from "./resistance.interface";
-import { setInterface } from "./set.interface";
-import { legalityInterface } from "./legality.interface";
-import { cardImageInterface } from "./image";
+import { AncientTraitInterface } from "./ancient-trait.interface";
+import { AbilityInterface } from "./ability.interface";
+import { AttackInterface } from "./attack.interface";
+import { WeaknessInterface } from "./weakness.interface";
+import { ResistanceInterface } from "./resistance.interface";
+import { SetInterface } from "./set.interface";
+import { LegalityInterface } from "./legality.interface";
+import { CardImageInterface } from "./image";
 import { ITCGPlayerInterface } from "./tcgplayer.interface";
-import { cardMarketInterface } from "./card-market.interface";
+import { CardMarketInterface } from "./card-market.interface";
 
-export interface cardInterface {
+export interface CardInterface {
   id: string;
   name: string;
   supertype: string;
@@ -19,22 +19,22 @@ export interface cardInterface {
   evolvesFrom?: string;
   evolvesTo?: string[];
   rules?: string[];
-  ancientTrait?: ancientTraitInterface;
-  abilities?: abilityInterface[];
-  attacks?: attackInterface[];
-  weaknesses?: weaknessInterface[];
-  resistances?: resistanceInterface[];
+  ancientTrait?: AncientTraitInterface;
+  abilities?: AbilityInterface[];
+  attacks?: AttackInterface[];
+  weaknesses?: WeaknessInterface[];
+  resistances?: ResistanceInterface[];
   retreatCost?: string[];
   convertedRetreatCost?: number;
-  set: setInterface;
+  set: SetInterface;
   number: string;
   artist?: string;
   rarity: string;
   flavorText?: string;
   nationalPokedexNumbers?: number[];
-  legalities: legalityInterface;
+  legalities: LegalityInterface;
   regulationMark?: string;
-  images: cardImageInterface;
+  images: CardImageInterface;
   tcgplayer?: ITCGPlayerInterface;
-  cardmarket?: cardMarketInterface;
+  cardmarket?: CardMarketInterface;
 }
