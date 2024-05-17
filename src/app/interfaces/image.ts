@@ -3,6 +3,11 @@ export interface SetImageInterface {
   logo: string;
 }
 
+export interface ExtraSetInfoInterface {
+  userTotalCards: string;
+  bgImage: string;
+}
+
 export interface CardImageInterface {
   small: string;
   large: string;

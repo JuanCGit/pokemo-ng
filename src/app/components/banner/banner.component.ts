@@ -1,4 +1,5 @@
 import { Component, Input } from "@angular/core";
+import { SetInterface } from "../../interfaces/set.interface";
 
 @Component({
   selector: "app-banner",
@@ -6,7 +7,10 @@ import { Component, Input } from "@angular/core";
   styleUrl: "./banner.component.scss",
 })
 export class BannerComponent {
-  @Input() bgImage: string = "";
+  @Input() expansion!: SetInterface;
   @Input() isHomeBanner: boolean = false;
-  @Input() overImage: string = "";
+
+  // Should disappear
+  @Input() bgImage: string = "";
+  @Input() logo: string = "";
 }

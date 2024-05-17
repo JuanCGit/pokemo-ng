@@ -33,6 +33,19 @@ export class PokemonService extends AbstractService {
     );
   }
 
+  getCards(page: number): Observable<PaginatedInterface<CardInterface>> {
+    return this.cacheRequest<PaginatedInterface<CardInterface>>(
+      `cards-${page}`,
+      this.http.request<PaginatedInterface<CardInterface>>(
+        "GET",
+        `${this.apiUrl}/cards?page=${page}`,
+        {
+          headers: this.headers,
+        },
+      ),
+    );
+  }
+
   getCardsByExpansion(
     expansionId: string,
   ): Observable<PaginatedInterface<CardInterface>> {
@@ -60,6 +73,43 @@ export class PokemonService extends AbstractService {
           headers: this.headers,
         },
       ),
+    );
+  }
+
+  // getSetDetails(setId: string): Observable<any> {
+  //   return this.http.request("GET", `${this.apiUrl}/sets/${setId}`, {
+  //     headers: this.headers,
+  //   });
+  // }
+
+  getSets(page: number) {
+    return this.cacheRequest(
+      `sets-${page}`,
+      this.http.request<PaginatedInterface<SetInterface>>(
+        "GET",
+        `${this.apiUrl}/sets?page=${page}`,
+        {
+          headers: this.headers,
+        },
+      ),
+      // .pipe(
+      //   mergeMap((paginatedSets) => {
+      //     const sets = paginatedSets.data;
+      //     const setDetailsObservables = sets.map((set) =>
+      //       this.getSetDetails(set.id).pipe(
+      //         map((details) => ({
+      //           ...set,
+      //           additionalData: details,
+      //         })),
+      //       ),
+      //     );
+      //     return forkJoin(setDetailsObservables).pipe(
+      //       map((updatedSets) => ({
+      //         items: updatedSets,
+      //       })),
+      //     );
+      //   }),
+      // ),
     );
   }
 }
