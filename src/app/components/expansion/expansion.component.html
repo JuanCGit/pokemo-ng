@@ -1,14 +1,14 @@
-<div class="expansion" [style.background-image]="'url(' + expansion.bgImage + ')'">
-  <div class="expansion__overlay"></div>
-  <img class="expansion__title" [src]="expansion.overImage" alt="over banner image" />
-  <div class="expansion__progress">
+<div class="expansion" [style.background-image]="'url(' + expansion.bgSetImage + ')'">
+    <div class="expansion__overlay"></div>
+    <img class="expansion__title" [src]="expansion.images.logo" alt="over banner"/>
+    <div class="expansion__progress">
     <span class="expansion__progress__quantity">{{
-      expansion.acquired + "/" + expansion.total
-    }}</span>
-    <app-progress-bar
-      blackOrWhite="W"
-      [acquired]="expansion.acquired"
-      [total]="expansion.total"
-    ></app-progress-bar>
-  </div>
+            expansion.userAcquiredCards + "/" + expansion.total
+        }}</span>
+        <app-progress-bar
+                blackOrWhite="W"
+                [acquired]="expansion.userAcquiredCards"
+                [total]="expansion.total"
+        ></app-progress-bar>
+    </div>
 </div>

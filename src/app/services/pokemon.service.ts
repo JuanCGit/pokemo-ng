@@ -1,12 +1,13 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { forkJoin, map, mergeMap, Observable } from "rxjs";
+import { forkJoin, map, mergeMap, Observable, of } from "rxjs";
 import { API_TOKEN, API_URL, API_VERSION } from "../../environment/api.const";
 import { CardInterface } from "../interfaces/card.interface";
 import { PaginatedInterface } from "../interfaces/paginatedInterface";
 import { AbstractService } from "./abstract-service";
 import { SetInterface } from "../interfaces/set.interface";
 import { ExpansionModel } from "../models/expansion.model";
+import { ExtraExpansionInfoInterface } from "../interfaces/image";
 
 @Injectable({
   providedIn: "root",
@@ -77,20 +78,23 @@ export class PokemonService extends AbstractService {
     );
   }
 
-  getSetExtraInfo(setId: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/sets/${setId}`, {
-      headers: this.headers,
+  getSetExtraInfo(setId: string): Observable<ExtraExpansionInfoInterface> {
+    return of({
+      userTotalCards: 8,
+      bgImage: "/assets/images/example-home-banner.jpg",
     });
   }
 
-  getSets(page: number): Observable<ExpansionModel[]> {
+  getSets(page: number, pageSize: number = 15): Observable<ExpansionModel[]> {
     return this.cacheRequest(
       `sets-${page}`,
       this.http
-        .get<PaginatedInterface<SetInterface>>(`${this.apiUrl}/sets`, {
-          params: { page: page.toString() },
-          headers: this.headers,
-        })
+        .get<PaginatedInterface<SetInterface>>(
+          `${this.apiUrl}/sets?page=${page}&pageSize=${pageSize}&orderBy=-releaseDate`,
+          {
+            headers: this.headers,
+          },
+        )
         .pipe(
           mergeMap((paginatedSets) => {
             const defaultExpansions: SetInterface[] = paginatedSets.data;

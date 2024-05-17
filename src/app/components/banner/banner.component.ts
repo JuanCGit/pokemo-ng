@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { SetInterface } from "../../interfaces/set.interface";
+import { ExpansionModel } from "../../models/expansion.model";
 
 @Component({
   selector: "app-banner",
@@ -7,10 +7,6 @@ import { SetInterface } from "../../interfaces/set.interface";
   styleUrl: "./banner.component.scss",
 })
 export class BannerComponent {
-  @Input() expansion!: SetInterface;
+  @Input() expansion!: ExpansionModel;
   @Input() isHomeBanner: boolean = false;
-
-  // Should disappear
-  @Input() bgImage: string = "";
-  @Input() logo: string = "";
 }

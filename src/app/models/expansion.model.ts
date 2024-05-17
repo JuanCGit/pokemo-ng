@@ -1,5 +1,11 @@
-import { ExtraSetInfoInterface, SetImageInterface } from "../interfaces/image";
-import { LegalityInterface } from "../interfaces/legality.interface";
+import {
+  ExtraExpansionInfoInterface,
+  SetImageInterface,
+} from "../interfaces/image";
+import {
+  LegalityEnum,
+  LegalityInterface,
+} from "../interfaces/legality.interface";
 import { SetInterface } from "../interfaces/set.interface";
 
 export class ExpansionModel {
@@ -14,14 +20,14 @@ export class ExpansionModel {
   total: number;
   updatedAt: string;
 
-  userTotalCards: string;
+  userAcquiredCards: number;
 
   // Could change
   bgSetImage: string;
 
   constructor(
     defaultSetData: SetInterface,
-    extraSetInfo: ExtraSetInfoInterface,
+    extraSetInfo: ExtraExpansionInfoInterface,
   ) {
     this.id = defaultSetData.id;
     this.images = defaultSetData.images;
@@ -34,6 +40,26 @@ export class ExpansionModel {
     this.total = defaultSetData.total;
     this.updatedAt = defaultSetData.updatedAt;
     this.bgSetImage = extraSetInfo.bgImage;
-    this.userTotalCards = extraSetInfo.userTotalCards;
+    this.userAcquiredCards = extraSetInfo.userTotalCards;
   }
 }
+
+export const ExpansionModelMock = new ExpansionModel(
+  {
+    id: "12",
+    images: { logo: "/assets/images/example-over-image.png", symbol: "" },
+    legalities: {
+      expanded: LegalityEnum.LEGAL,
+      standard: LegalityEnum.BANNED,
+      unlimited: LegalityEnum.BANNED,
+    },
+    name: "",
+    printedTotal: 0,
+    ptcgoCode: "",
+    releaseDate: "",
+    series: "",
+    total: 0,
+    updatedAt: "",
+  },
+  { bgImage: "/assets/images/example-home-banner.jpg", userTotalCards: 15 },
+);

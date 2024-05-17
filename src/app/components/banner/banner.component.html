@@ -1,6 +1,6 @@
 <div class="banner">
-    <div class="banner__inner" [style.background-image]="'url(' + bgImage + ')'">
-        <img [src]="logo" alt="logo"/>
+    <div class="banner__inner" [style.background-image]="'url(' + expansion.bgSetImage + ')'">
+        <img [src]="expansion.images.logo" alt="logo"/>
     </div>
     @if (isHomeBanner) {
         <div class="banner__action">
