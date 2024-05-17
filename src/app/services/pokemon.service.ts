@@ -1,11 +1,12 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { forkJoin, map, mergeMap, Observable } from "rxjs";
 import { API_TOKEN, API_URL, API_VERSION } from "../../environment/api.const";
 import { CardInterface } from "../interfaces/card.interface";
 import { PaginatedInterface } from "../interfaces/paginatedInterface";
 import { AbstractService } from "./abstract-service";
 import { SetInterface } from "../interfaces/set.interface";
+import { ExpansionModel } from "../models/expansion.model";
 
 @Injectable({
   providedIn: "root",
@@ -76,40 +77,32 @@ export class PokemonService extends AbstractService {
     );
   }
 
-  // getSetDetails(setId: string): Observable<any> {
-  //   return this.http.request("GET", `${this.apiUrl}/sets/${setId}`, {
-  //     headers: this.headers,
-  //   });
-  // }
+  getSetExtraInfo(setId: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/sets/${setId}`, {
+      headers: this.headers,
+    });
+  }
 
-  getSets(page: number) {
+  getSets(page: number): Observable<ExpansionModel[]> {
     return this.cacheRequest(
       `sets-${page}`,
-      this.http.request<PaginatedInterface<SetInterface>>(
-        "GET",
-        `${this.apiUrl}/sets?page=${page}`,
-        {
+      this.http
+        .get<PaginatedInterface<SetInterface>>(`${this.apiUrl}/sets`, {
+          params: { page: page.toString() },
           headers: this.headers,
-        },
-      ),
-      // .pipe(
-      //   mergeMap((paginatedSets) => {
-      //     const sets = paginatedSets.data;
-      //     const setDetailsObservables = sets.map((set) =>
-      //       this.getSetDetails(set.id).pipe(
-      //         map((details) => ({
-      //           ...set,
-      //           additionalData: details,
-      //         })),
-      //       ),
-      //     );
-      //     return forkJoin(setDetailsObservables).pipe(
-      //       map((updatedSets) => ({
-      //         items: updatedSets,
-      //       })),
-      //     );
-      //   }),
-      // ),
+        })
+        .pipe(
+          mergeMap((paginatedSets) => {
+            const defaultExpansions: SetInterface[] = paginatedSets.data;
+            const extraInfoRequests: Observable<ExpansionModel>[] =
+              defaultExpansions.map((set) =>
+                this.getSetExtraInfo(set.id).pipe(
+                  map((extraInfo) => new ExpansionModel(set, extraInfo)),
+                ),
+              );
+            return forkJoin(extraInfoRequests);
+          }),
+        ),
     );
   }
 }
