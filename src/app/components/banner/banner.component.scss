@@ -15,9 +15,10 @@
     height: 325px;
 
     img {
-      height: 185px;
+      overflow: auto;
     }
   }
+
   &__action {
     position: absolute;
     bottom: -28px;

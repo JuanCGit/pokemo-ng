@@ -1,11 +1,11 @@
 <div class="expansions">
-  <div class="expansions__header">
-    <span class="expansions__header__title">{{carrouselTitle}}</span>
-    <div class="expansions__header__all">See All</div>
-  </div>
-  <div class="expansions__carrousel">
-    @for (expansion of expansions; track expansion) {
-    <app-expansion [expansion]="expansion"></app-expansion>
-    }
-  </div>
+    <div class="expansions__header">
+        <span class="expansions__header__title">{{ carrouselTitle }}</span>
+        <div class="expansions__header__all" [routerLink]="'/expansions'">See All</div>
+    </div>
+    <div class="expansions__carrousel">
+        @for (expansion of expansions; track expansion) {
+            <app-expansion [expansion]="expansion"></app-expansion>
+        }
+    </div>
 </div>

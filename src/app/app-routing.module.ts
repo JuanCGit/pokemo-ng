@@ -16,6 +16,13 @@ const routes: Routes = [
         (m) => m.ExpansionDetailPageModule,
       ),
   },
+  {
+    path: "expansions",
+    loadChildren: () =>
+      import("./pages/expansion-list-page/expansion-list-page.module").then(
+        (m) => m.ExpansionListPageModule,
+      ),
+  },
   { path: "**", redirectTo: "" },
 ];
 
