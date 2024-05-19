@@ -1,5 +1,7 @@
 import { Component } from "@angular/core";
-import { ExpansionInterface } from "../../interfaces/expansion.interface";
+import { ExpansionModel } from "../../models/expansion.model";
+import { Observable } from "rxjs";
+import { PokemonService } from "../../services/pokemon.service";
 
 @Component({
   selector: "app-home-page",
@@ -7,16 +9,11 @@ import { ExpansionInterface } from "../../interfaces/expansion.interface";
   styleUrl: "./home-page.component.scss",
 })
 export class HomePageComponent {
-  constructor() {}
+  constructor(private pokemonService: PokemonService) {}
 
-  expansionMock: ExpansionInterface = {
-    overImage: "/assets/images/example-over-image.png",
-    bgImage: "/assets/images/example-expansion.jpg",
-    total: 100,
-    acquired: 20,
-  };
-  expansions: ExpansionInterface[] = Array.from(
-    { length: 10 },
-    () => this.expansionMock,
+  page: number = 0;
+
+  expansions$: Observable<ExpansionModel[]> = this.pokemonService.getSets(
+    this.page,
   );
 }

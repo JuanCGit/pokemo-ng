@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { ExpansionInterface } from "../../interfaces/expansion.interface";
+import { ExpansionModel } from "../../models/expansion.model";
 
 @Component({
   selector: "app-expansion",
@@ -7,5 +7,5 @@ import { ExpansionInterface } from "../../interfaces/expansion.interface";
   styleUrl: "./expansion.component.scss",
 })
 export class ExpansionComponent {
-  @Input() expansion!: ExpansionInterface;
+  @Input() expansion!: ExpansionModel;
 }

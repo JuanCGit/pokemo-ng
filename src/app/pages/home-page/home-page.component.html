@@ -1,9 +1,8 @@
-<div class="home">
-    <app-banner
-            [bgImage]="'/assets/images/example-home-banner.jpg'"
-            [isHomeBanner]="true"
-            [logo]="'/assets/images/example-over-image.png'"
-    >
-    </app-banner>
-    <app-expansions-carrousel [expansions]="expansions" [carrouselTitle]="'Last expansions'"></app-expansions-carrousel>
-</div>
+@if (expansions$ | async; as expansions) {
+    <div class="home">
+        <app-banner [expansion]="expansions[0]" [isHomeBanner]="true"></app-banner>
+        <app-expansions-carrousel [expansions]="expansions"
+                                  [carrouselTitle]="'Last expansions'">
+        </app-expansions-carrousel>
+    </div>
+}

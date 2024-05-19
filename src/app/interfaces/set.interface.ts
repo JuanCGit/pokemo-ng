@@ -1,4 +1,4 @@
-import { ExtraSetInfoInterface, SetImageInterface } from "./image";
+import { SetImageInterface } from "./image";
 import { LegalityInterface } from "./legality.interface";
 
 export interface SetInterface {
@@ -12,5 +12,4 @@ export interface SetInterface {
   series: string;
   total: number;
   updatedAt: string;
-  extraSetInfo?: ExtraSetInfoInterface;
 }
