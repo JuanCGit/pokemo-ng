@@ -11,7 +11,6 @@ export class AbstractService {
     key: string,
     request: Observable<T>,
   ): Observable<T> {
-    console.log(this.cache);
     if (!this.cache[key]) {
       this.cache[key] = request.pipe(shareReplay(1));
     }

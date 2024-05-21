@@ -50,12 +50,14 @@ export class PokemonService extends AbstractService {
 
   getCardsByExpansion(
     expansionId: string,
+    page: number = 1,
+    pageSize: number = 50,
   ): Observable<PaginatedInterface<CardInterface>> {
     return this.cacheRequest(
-      `card-${expansionId}`,
+      `card-${expansionId}-page-${page}`,
       this.http.request<PaginatedInterface<CardInterface>>(
         "GET",
-        `${this.apiUrl}/cards?q=set.id:${expansionId}`,
+        `${this.apiUrl}/cards?page=${page}&pageSize=${pageSize}&q=set.id:${expansionId}`,
         {
           headers: this.headers,
         },
@@ -78,6 +80,27 @@ export class PokemonService extends AbstractService {
     );
   }
 
+  //TODO: Change paginatedInterface to ResponseInterface wuth optional or create new Interface
+  getSetById(expansionId: string): Observable<ExpansionModel> {
+    return this.cacheRequest(
+      `set-${expansionId}`,
+      this.http.request<{ data: SetInterface }>(
+        "GET",
+        `${this.apiUrl}/sets/${expansionId}`,
+        {
+          headers: this.headers,
+        },
+      ),
+    ).pipe(
+      mergeMap((expansion) => {
+        return this.getSetExtraInfo(expansion.data.id).pipe(
+          map((extraInfo) => new ExpansionModel(expansion.data, extraInfo)),
+        );
+      }),
+    );
+  }
+
+  //TODO: Should call our backend ton get extra set info
   getSetExtraInfo(setId: string): Observable<ExtraExpansionInfoInterface> {
     return of({
       userTotalCards: 8,
@@ -85,7 +108,10 @@ export class PokemonService extends AbstractService {
     });
   }
 
-  getSets(page: number, pageSize: number = 15): Observable<ExpansionModel[]> {
+  getSets(
+    page: number = 0,
+    pageSize: number = 15,
+  ): Observable<ExpansionModel[]> {
     return this.cacheRequest(
       `sets-${page}`,
       this.http

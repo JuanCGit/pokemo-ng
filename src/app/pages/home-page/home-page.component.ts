@@ -11,7 +11,7 @@ import { PokemonService } from "../../services/pokemon.service";
 export class HomePageComponent {
   constructor(private pokemonService: PokemonService) {}
 
-  page: number = 0;
+  page: number = 1;
 
   expansions$: Observable<ExpansionModel[]> = this.pokemonService.getSets(
     this.page,
