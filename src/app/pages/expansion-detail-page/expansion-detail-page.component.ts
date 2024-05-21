@@ -9,7 +9,7 @@ import {
 } from "@angular/core";
 import { CardInterface } from "../../interfaces/card.interface";
 import { PokemonService } from "../../services/pokemon.service";
-import { map, Observable, scan, startWith } from "rxjs";
+import { map, Observable } from "rxjs";
 import { ExpansionModel } from "../../models/expansion.model";
 
 @Component({
@@ -21,28 +21,16 @@ export class ExpansionDetailPageComponent {
   id: InputSignal<string> = input("");
   page: WritableSignal<number> = signal(1);
   scrollEnd = false;
-
-  // page$ = toObservable(this.page);
-  // expansionCards$: Observable<CardInterface[]> = this.page$.pipe(
-  //   switchMap(() =>
-  //     this.pokemonService.getCardsByExpansion(this.id(), this.page()),
-  //   ),
-  //   map((response) => response.data),
-  //   scan<CardInterface[], CardInterface[]>((acc, newCards) => {
-  //     this.scrollEnd = newCards.length === 0;
-  //     return [...acc, ...newCards];
-  //   }, []),
-  //   startWith([]),
-  // );
+  acumulatedCards: CardInterface[] = [];
 
   expansionCards$: Signal<Observable<CardInterface[]>> = computed(() =>
     this.pokemonService.getCardsByExpansion(this.id(), this.page()).pipe(
-      map((response) => response.data),
-      scan<CardInterface[], CardInterface[]>((acc, newCards) => {
-        this.scrollEnd = newCards.length === 0;
-        return [...acc, ...newCards];
-      }, []),
-      startWith([]),
+      map((response) => {
+        if (response.totalCount <= response.page * response.pageSize)
+          this.scrollEnd = true;
+        this.acumulatedCards = [...this.acumulatedCards, ...response.data];
+        return this.acumulatedCards;
+      }),
     ),
   );
 
@@ -52,8 +40,8 @@ export class ExpansionDetailPageComponent {
 
   constructor(private pokemonService: PokemonService) {}
 
-  onScroll(event: any): void {
-    const element = event.target;
+  onScroll(event: Event): void {
+    const element = event.target as HTMLElement;
     const tolerance = 50;
 
     if (
