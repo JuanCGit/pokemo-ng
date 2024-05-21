@@ -1,6 +1,7 @@
 <div class="expansion" [style.background-image]="'url(' + expansion.bgSetImage + ')'">
     <div class="expansion__overlay"></div>
-    <img class="expansion__title" [src]="expansion.images.logo" alt="over banner"/>
+    <img class="expansion__title" [src]="expansion.images.logo" [routerLink]="'expansion/' + expansion.id"
+         alt="over banner"/>
     <div class="expansion__progress">
     <span class="expansion__progress__quantity">{{
             expansion.userAcquiredCards + "/" + expansion.total
