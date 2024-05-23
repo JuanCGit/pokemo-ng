@@ -1,6 +1,7 @@
 .overlay-container {
+  padding-left: 104px;
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
   position: fixed;
   top: 0;
@@ -8,9 +9,28 @@
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.8);
+ 
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    color: white;
+  }
+}
+
+.background-container {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+
 }
 
 .overlay-container img {
-  max-width: 90%;
-  max-height: 90%;
+  max-width: 80%;
+  max-height: 80%;
 }
