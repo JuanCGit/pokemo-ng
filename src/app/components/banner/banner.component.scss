@@ -4,8 +4,9 @@
 
   &__inner {
     display: flex;
-    align-items: center;
-    justify-content: end;
+    flex-direction: column;
+    align-items: end;
+    justify-content: center;
     padding: 0 40px;
     background-size: cover;
     background-position: center;
@@ -13,6 +14,26 @@
     width: 100%;
     box-sizing: border-box;
     height: 325px;
+
+    &__info {
+      width: fit-content;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      &__progress {
+        display: flex;
+        align-items: center;
+        padding: 0 48px;
+        gap: 16px;
+        span {
+          font-size: 22px;
+          color: var(--light);
+        }
+        app-progress-bar {
+          width: 100%;
+        }
+      }
+    }
 
     img {
       height: 150px;

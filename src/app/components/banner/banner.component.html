@@ -1,10 +1,25 @@
 <div class="banner">
-    <div class="banner__inner" [style.background-image]="'url(' + expansion.bgSetImage + ')'">
-        <img [src]="expansion.images.logo" alt="logo"/>
-    </div>
-    @if (isHomeBanner) {
-        <div class="banner__action">
-            <app-button>See cards</app-button>
+  <div
+    class="banner__inner"
+    [style.background-image]="'url(' + expansion.bgSetImage + ')'"
+  >
+    <div class="banner__inner__info">
+      <img [src]="expansion.images.logo" alt="logo" />
+      @if (!isHomeBanner) {
+        <div class="banner__inner__info__progress">
+            <span>{{ expansion.userAcquiredCards }}/{{expansion.total}}</span>
+          <app-progress-bar
+            blackOrWhite="W"
+            [acquired]="expansion.userAcquiredCards"
+            [total]="expansion.total"
+          ></app-progress-bar>
         </div>
-    }
+      }
+    </div>
+  </div>
+  @if (isHomeBanner) {
+    <div class="banner__action">
+      <app-button>See cards</app-button>
+    </div>
+  }
 </div>
