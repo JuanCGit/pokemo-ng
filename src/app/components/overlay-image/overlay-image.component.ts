@@ -7,8 +7,15 @@ import { Component } from "@angular/core";
 })
 export class OverlayImageComponent {
   imageUrl: string | null = null;
+  backgroundImageUrl: string | null = null;
 
-  show(imageUrl: string) {
+  show(imageUrl: string, backgroundImageUrl: string) {
     this.imageUrl = imageUrl;
+    this.backgroundImageUrl = backgroundImageUrl;
+  }
+
+  close() {
+    this.imageUrl = null;
+    this.backgroundImageUrl = null;
   }
 }
