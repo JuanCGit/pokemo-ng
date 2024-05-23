@@ -20,11 +20,12 @@ body {
   --input-bg: #DBDCDF;
   --input-placeholder: #23232366;
   --dark: #232323;
-  --dark-transparen: rgba(35, 35, 35, 0.2);
+  --dark-transparent: rgba(35, 35, 35, 0.2);
   --light: #EFF0F4;
   --light-transparent:  rgba(239, 240, 244, 0.2);
   --interactive: #1F50FF;
   --interactive-bg: #e9eeff;
+  --overlay: rgba(35, 35, 35, 0.6);
 
   @font-face {
     font-family: 'kanit-regular';
