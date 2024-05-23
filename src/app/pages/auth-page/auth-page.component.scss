@@ -1,0 +1,25 @@
+.auth {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: white;
+  display: flex;
+  justify-content: end;
+
+  &__panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 36%;
+    height: 100%;
+    background-color: var(--dark);
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+  }
+}
