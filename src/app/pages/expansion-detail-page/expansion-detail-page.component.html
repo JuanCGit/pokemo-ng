@@ -1,20 +1,20 @@
 <div class="container" (scroll)="onScroll($event)">
-    @if (expansion$() | async; as expansionModel) {
-        <div class="expansion">
-            <app-banner
-                    [expansion]="expansionModel"
-            ></app-banner>
-        </div>
-    }
-    @if (expansionCards$() | async; as cards) {
-        <div class="cards">
-            @for (card of cards; track card.id) {
-                <img [src]="card.images.large" [alt]="card.name"
-                     (click)="imageOverlayComponent.show(card.images.large)">
-            }
-        </div>
-    }
+  @if (expansion$() | async; as expansionModel) {
+    <div class="expansion">
+      <app-banner [expansion]="expansionModel"></app-banner>
+    </div>
+  }
+  @if (expansionCards$() | async; as cards) {
+    <div class="cards">
+      @for (card of cards; track card.id) {
+        <img
+          [src]="card.images.large"
+          [alt]="card.name"
+          (click)="imageOverlayComponent.show(card.images.large)"
+        />
+      }
+    </div>
+  }
 </div>
-
 
 <app-overlay-image #imageOverlayComponent></app-overlay-image>

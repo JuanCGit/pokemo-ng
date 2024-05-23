@@ -9,8 +9,10 @@ import {
 } from "@angular/core";
 import { CardInterface } from "../../interfaces/card.interface";
 import { PokemonService } from "../../services/pokemon.service";
-import { map, Observable } from "rxjs";
+import { Observable, BehaviorSubject, combineLatest } from "rxjs";
+import { switchMap, tap } from "rxjs/operators";
 import { ExpansionModel } from "../../models/expansion.model";
+import { toObservable } from "@angular/core/rxjs-interop";
 
 @Component({
   selector: "app-expansion-detail-page",
@@ -19,18 +21,26 @@ import { ExpansionModel } from "../../models/expansion.model";
 })
 export class ExpansionDetailPageComponent {
   id: InputSignal<string> = input("");
+  id$: Observable<string> = toObservable(this.id);
   page: WritableSignal<number> = signal(1);
+  page$: Observable<number> = toObservable(this.page);
   scrollEnd = false;
-  acumulatedCards: CardInterface[] = [];
-
+  private accumulatedCards$ = new BehaviorSubject<CardInterface[]>([]);
   expansionCards$: Signal<Observable<CardInterface[]>> = computed(() =>
-    this.pokemonService.getCardsByExpansion(this.id(), this.page()).pipe(
-      map((response) => {
-        if (response.totalCount <= response.page * response.pageSize)
-          this.scrollEnd = true;
-        this.acumulatedCards = [...this.acumulatedCards, ...response.data];
-        return this.acumulatedCards;
-      }),
+    combineLatest([this.id$, this.page$]).pipe(
+      switchMap(([id, page]) =>
+        this.pokemonService.getCardsByExpansion(id, page).pipe(
+          tap((response) => {
+            if (response.totalCount <= response.page * response.pageSize)
+              this.scrollEnd = true;
+            const accumulated = this.accumulatedCards$.value.concat(
+              response.data,
+            );
+            this.accumulatedCards$.next(accumulated);
+          }),
+        ),
+      ),
+      switchMap(() => this.accumulatedCards$.asObservable()),
     ),
   );
 
@@ -42,8 +52,7 @@ export class ExpansionDetailPageComponent {
 
   onScroll(event: Event): void {
     const element = event.target as HTMLElement;
-    const tolerance = 50;
-
+    const tolerance = 10;
     if (
       element.scrollHeight - element.scrollTop <=
         element.clientHeight + tolerance &&
