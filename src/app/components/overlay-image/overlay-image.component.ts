@@ -23,13 +23,13 @@ export class OverlayImageComponent implements OnDestroy {
 
   constructor(private renderer: Renderer2) {}
 
-  onMouseEnter(): void {
+  onMouseMove(event: MouseEvent) {
+    if (!this.bounds) return;
+    this.rotateToMouse(event);
+  }
+
+  onMouseEnter() {
     this.bounds = this.card.nativeElement.getBoundingClientRect();
-    this.mouseMoveListener = this.renderer.listen(
-      "document",
-      "mousemove",
-      this.rotateToMouse.bind(this),
-    );
   }
 
   onMouseLeave(): void {
@@ -41,7 +41,7 @@ export class OverlayImageComponent implements OnDestroy {
     this.glow.nativeElement.style.backgroundImage = "";
   }
 
-  rotateToMouse(event: MouseEvent): void {
+  private rotateToMouse(event: MouseEvent) {
     const mouseX = event.clientX;
     const mouseY = event.clientY;
     const leftX = mouseX - this.bounds.x;
@@ -53,12 +53,11 @@ export class OverlayImageComponent implements OnDestroy {
     const distance = Math.sqrt(center.x ** 2 + center.y ** 2);
 
     this.card.nativeElement.style.transform = `
-      scale3d(1.07, 1.07, 1.07)
       rotate3d(
         ${center.y / 100},
         ${-center.x / 100},
         0,
-        ${Math.log(distance) * 2}deg
+        ${Math.log(distance) * 4}deg
       )
     `;
 
