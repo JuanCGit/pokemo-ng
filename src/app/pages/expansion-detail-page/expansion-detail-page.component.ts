@@ -9,7 +9,7 @@ import {
 } from "@angular/core";
 import { CardInterface } from "../../interfaces/card.interface";
 import { PokemonService } from "../../services/pokemon.service";
-import { Observable, BehaviorSubject, combineLatest } from "rxjs";
+import { BehaviorSubject, combineLatest, Observable } from "rxjs";
 import { switchMap, tap } from "rxjs/operators";
 import { ExpansionModel } from "../../models/expansion.model";
 import { toObservable } from "@angular/core/rxjs-interop";
@@ -52,7 +52,7 @@ export class ExpansionDetailPageComponent {
 
   onScroll(event: Event): void {
     const element = event.target as HTMLElement;
-    const tolerance = 10;
+    const tolerance = 0.5;
     if (
       element.scrollHeight - element.scrollTop <=
         element.clientHeight + tolerance &&

@@ -80,7 +80,6 @@ export class PokemonService extends AbstractService {
     );
   }
 
-  //TODO: Change paginatedInterface to ResponseInterface wuth optional or create new Interface
   getSetById(expansionId: string): Observable<ExpansionModel> {
     return this.cacheRequest(
       `set-${expansionId}`,

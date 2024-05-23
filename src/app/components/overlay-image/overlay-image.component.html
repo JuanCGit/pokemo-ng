@@ -1,5 +1,14 @@
 @if (imageUrl) {
-    <div class="overlay-container" (click)="imageUrl = null">
-        <img [src]="imageUrl" alt="url">
+    <div [style]="'background-image: url(' + backgroundImageUrl +')'" class="background-container" (click)="close()"
+         id="background-container">
+        <div class="overlay-container">
+            <img [src]="imageUrl" alt="url" id="image">
+            <div class="overlay-container__info">
+                <h1>Hola texto 1</h1>
+                <h1>Hola texto 1</h1>
+                <h1>Hola texto 1</h1>
+                <h1>Hola texto 1</h1>
+            </div>
+        </div>
     </div>
 }
