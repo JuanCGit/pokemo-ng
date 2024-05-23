@@ -9,7 +9,34 @@
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.8);
- 
+
+  .card {
+    border-radius: 10px;
+    background-size: cover;
+    width: 450px;
+    height: 628px;
+    position: relative;
+
+    transition-duration: 300ms;
+    transition-property: transform, box-shadow;
+    transition-timing-function: ease-out;
+    transform: rotate3d(0);
+
+    :hover {
+      transition-duration: 150ms;
+      box-shadow: 0 5px 20px 5px #00000044;
+    }
+
+    .glow {
+      border-radius: 20px;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      background-image: radial-gradient(circle at 50% -20%, #ffffff22, #0000000f);
+    }
+  }
 
   &__info {
     display: flex;

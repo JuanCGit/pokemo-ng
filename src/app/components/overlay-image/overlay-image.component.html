@@ -2,7 +2,10 @@
     <div [style]="'background-image: url(' + backgroundImageUrl +')'" class="background-container" (click)="close()"
          id="background-container">
         <div class="overlay-container">
-            <img [src]="imageUrl" alt="url" id="image">
+            <div class="card" [style.background-image]="'url('+imageUrl+')'" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
+                <div class="glow"></div>
+            </div>
+            <!--<img [src]="imageUrl" alt="url" id="image">-->
             <div class="overlay-container__info">
                 <h1>Hola texto 1</h1>
                 <h1>Hola texto 1</h1>
