@@ -1,25 +1,31 @@
-import { Component, ElementRef, Renderer2 } from "@angular/core";
+import {
+  Component,
+  ElementRef,
+  Renderer2,
+  ViewChild,
+  OnDestroy,
+} from "@angular/core";
 
 @Component({
   selector: "app-overlay-image",
   templateUrl: "./overlay-image.component.html",
   styleUrl: "./overlay-image.component.scss",
 })
-export class OverlayImageComponent {
+export class OverlayImageComponent implements OnDestroy {
+  @ViewChild("card") card!: ElementRef<HTMLDivElement>;
+  @ViewChild("glow") glow!: ElementRef<HTMLDivElement>;
+
   private bounds!: DOMRect;
+  private mouseMoveListener: (() => void) | null = null;
+
   imageUrl: string | null = null;
   backgroundImageUrl: string | null = null;
 
-  constructor(
-    private el: ElementRef,
-    private renderer: Renderer2,
-  ) {}
+  constructor(private renderer: Renderer2) {}
 
   onMouseEnter(): void {
-    this.bounds = this.el.nativeElement
-      .querySelector(".card")
-      .getBoundingClientRect();
-    this.renderer.listen(
+    this.bounds = this.card.nativeElement.getBoundingClientRect();
+    this.mouseMoveListener = this.renderer.listen(
       "document",
       "mousemove",
       this.rotateToMouse.bind(this),
@@ -27,13 +33,12 @@ export class OverlayImageComponent {
   }
 
   onMouseLeave(): void {
-    this.renderer.removeClass(
-      this.el.nativeElement.querySelector(".card"),
-      "transformed",
-    );
-    this.el.nativeElement.querySelector(".card").style.transform = "";
-    this.el.nativeElement.querySelector(".glow").style.backgroundImage = "";
-    this.renderer.listen("document", "mousemove", () => {});
+    if (this.mouseMoveListener) {
+      this.mouseMoveListener();
+      this.mouseMoveListener = null;
+    }
+    this.card.nativeElement.style.transform = "";
+    this.glow.nativeElement.style.backgroundImage = "";
   }
 
   rotateToMouse(event: MouseEvent): void {
@@ -47,7 +52,7 @@ export class OverlayImageComponent {
     };
     const distance = Math.sqrt(center.x ** 2 + center.y ** 2);
 
-    this.el.nativeElement.querySelector(".card").style.transform = `
+    this.card.nativeElement.style.transform = `
       scale3d(1.07, 1.07, 1.07)
       rotate3d(
         ${center.y / 100},
@@ -57,7 +62,7 @@ export class OverlayImageComponent {
       )
     `;
 
-    this.el.nativeElement.querySelector(".glow").style.backgroundImage = `
+    this.glow.nativeElement.style.backgroundImage = `
       radial-gradient(
         circle at
         ${center.x * 2 + this.bounds.width / 2}px
@@ -76,5 +81,11 @@ export class OverlayImageComponent {
   close() {
     this.imageUrl = null;
     this.backgroundImageUrl = null;
+  }
+
+  ngOnDestroy(): void {
+    if (this.mouseMoveListener) {
+      this.mouseMoveListener();
+    }
   }
 }

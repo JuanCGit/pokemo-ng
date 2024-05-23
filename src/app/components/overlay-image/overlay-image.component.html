@@ -2,8 +2,8 @@
     <div [style]="'background-image: url(' + backgroundImageUrl +')'" class="background-container" (click)="close()"
          id="background-container">
         <div class="overlay-container">
-            <div class="card" [style.background-image]="'url('+imageUrl+')'" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
-                <div class="glow"></div>
+            <div #card class="card" [style.background-image]="'url('+imageUrl+')'" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
+                <div #glow class="glow"></div>
             </div>
             <!--<img [src]="imageUrl" alt="url" id="image">-->
             <div class="overlay-container__info">
