@@ -1,10 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  Renderer2,
-  ViewChild,
-  OnDestroy,
-} from "@angular/core";
+import { Component, ElementRef, ViewChild, OnDestroy } from "@angular/core";
 
 @Component({
   selector: "app-overlay-image",
@@ -20,8 +14,6 @@ export class OverlayImageComponent implements OnDestroy {
 
   imageUrl: string | null = null;
   backgroundImageUrl: string | null = null;
-
-  constructor(private renderer: Renderer2) {}
 
   onMouseMove(event: MouseEvent) {
     if (!this.bounds) return;
