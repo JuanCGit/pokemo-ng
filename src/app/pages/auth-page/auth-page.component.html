@@ -2,23 +2,22 @@
   <div class="auth">
     <div class="auth__panel">
       <form [formGroup]="vm.authForm" class="auth__form-container__form">
-        <div *ngIf="vm.newUser">
+        @if (vm.newUser) {
           <input type="text" formControlName="name" />
-        </div>
-
+        }
         <input type="email" formControlName="email" email />
 
         <input type="password" formControlName="password" />
 
-        <div *ngIf="vm.newUser">
-          <input type="password" formControlName="repeatPassword" />
-        </div>
-      </form>
         @if (vm.newUser) {
-            <span>Ya tienes una cuenta? Login</span>
-        } @else {
-            <span>Todavía no tienes una cuenta? Register</span>
+          <input type="password" formControlName="repeatPassword" />
         }
+      </form>
+      @if (vm.newUser) {
+        <span>Ya tienes una cuenta? Login</span>
+      } @else {
+        <span>Todavía no tienes una cuenta? Register</span>
+      }
     </div>
   </div>
 }
