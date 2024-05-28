@@ -1,23 +1,59 @@
 @if (vm$ | async; as vm) {
-  <div class="auth">
+  <div
+    class="auth"
+    [style.background-image]="
+      'url(assets/images/' + (vm.newUser ? 'login' : 'register') + '-bg.jpg)'
+    "
+  >
     <div class="auth__panel">
       <form [formGroup]="vm.authForm" class="auth__form-container__form">
         @if (vm.newUser) {
-          <input type="text" formControlName="name" />
+          <div class="auth__panel__input">
+            <input type="text" formControlName="name" placeholder="Name" />
+          </div>
         }
-        <input type="email" formControlName="email" email />
+        <div class="auth__panel__input">
+          <input
+            type="email"
+            formControlName="email"
+            email
+            placeholder="Email"
+          />
+        </div>
 
-        <input type="password" formControlName="password" />
+        <div class="auth__panel__input">
+          <input
+            type="password"
+            formControlName="password"
+            placeholder="Password"
+          />
+        </div>
 
         @if (vm.newUser) {
-          <input type="password" formControlName="repeatPassword" />
+          <div class="auth__panel__input">
+            <input
+              type="password"
+              formControlName="repeatPassword"
+              placeholder="Repeat password"
+            />
+          </div>
         }
       </form>
-      @if (vm.newUser) {
-        <span>Ya tienes una cuenta? Login</span>
-      } @else {
-        <span>Todavía no tienes una cuenta? Register</span>
-      }
+      <div class="auth__panel__actions">
+        @if (vm.newUser) {
+          <span>
+              Ya tienes una cuenta?
+            <u routerLink="/auth/login"><b>Login</b></u>
+          </span>
+          <span class="auth__panel__actions__button"><u><b>Registrarse</b></u></span>
+        } @else {
+          <span>
+            Todavía no tienes una cuenta?
+            <u routerLink="/auth/register"><b>Register</b></u>
+          </span>
+          <span class="auth__panel__actions__button"><u><b>Entrar</b></u></span>
+        }
+      </div>
     </div>
   </div>
 }
