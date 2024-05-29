@@ -23,6 +23,13 @@ const routes: Routes = [
         (m) => m.ExpansionListPageModule,
       ),
   },
+  {
+    path: "auth",
+    loadChildren: () =>
+      import("./pages/auth-page/auth-page.module").then(
+        (m) => m.AuthPageModule,
+      ),
+  },
   { path: "**", redirectTo: "" },
 ];
 
